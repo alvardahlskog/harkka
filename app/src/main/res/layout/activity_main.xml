@@ -22,12 +22,12 @@
 
     <EditText
         android:id="@+id/editTextSearch"
-        android:layout_width="211dp"
-        android:layout_height="52dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:ems="10"
-        android:hint="Kaupunki"
         android:inputType="text"
+        android:hint="Kaupunki"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
