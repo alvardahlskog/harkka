@@ -18,10 +18,10 @@
         android:text="Hae kunnan tiedot"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextSearch" />
+        app:layout_constraintTop_toBottomOf="@+id/editMunicipalityName" />
 
     <EditText
-        android:id="@+id/editTextSearch"
+        android:id="@+id/editMunicipalityName"
         android:layout_width="211dp"
         android:layout_height="55dp"
         android:layout_marginTop="100dp"
@@ -35,6 +35,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="162dp"
         android:layout_height="199dp"
+        android:layout_marginTop="8dp"
+        android:id="@+id/rvSearches"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />

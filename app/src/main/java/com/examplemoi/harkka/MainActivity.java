@@ -1,5 +1,6 @@
 package com.examplemoi.harkka;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,19 +12,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<Search> searches = new ArrayList<>();
     private EditText editName;
-
+    RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
         editName = findViewById(R.id.editMunicipalityName);
+        Button button = findViewById(R.id.button);
+        recyclerView = findViewById(R.id.rvSearches);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new SearchListAdapter(getApplicationContext(), searches));
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchMunicipality(editName.toString());
+                switchToMunicipality(v);
+                MainActivity.this.recreate();
+            }
+
+        });
     }
 
     public void searchMunicipality(String municipality){
@@ -33,11 +49,14 @@ public class MainActivity extends AppCompatActivity {
             searches = new ArrayList<Search>();
         }
         searches.add(search);
+        System.out.println(searches);
     }
 
     public void switchToMunicipality(View view) {
         Intent intent = new Intent(this, MunicipalityActivity.class);
         startActivity(intent);
     }
+
+
 
 }

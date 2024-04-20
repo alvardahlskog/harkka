@@ -1,5 +1,6 @@
 package com.examplemoi.harkka.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.examplemoi.harkka.MainActivity;
+import com.examplemoi.harkka.MunicipalityActivity;
 import com.examplemoi.harkka.R;
 
 /**
@@ -63,4 +66,6 @@ public class CompareFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_compare, container, false);
     }
+
+
 }
