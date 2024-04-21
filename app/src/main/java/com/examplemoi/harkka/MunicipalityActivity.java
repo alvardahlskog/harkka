@@ -1,5 +1,6 @@
 package com.examplemoi.harkka;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -26,6 +27,8 @@ public class MunicipalityActivity extends AppCompatActivity {
 
         TabLayout tabLayout = findViewById(R.id.tabLayout);
         ViewPager2 viewArea = findViewById(R.id.viewArea);
+        Intent intent = getIntent();
+        String name = intent.getStringExtra("editTextValue");
         TabPagerAdapter tabPagerAdapter = new TabPagerAdapter(this);
         viewArea.setAdapter(tabPagerAdapter);
 

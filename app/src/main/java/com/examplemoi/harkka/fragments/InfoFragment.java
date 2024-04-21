@@ -1,5 +1,6 @@
 package com.examplemoi.harkka.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,60 +8,61 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.examplemoi.harkka.Info;
+import com.examplemoi.harkka.MainActivity;
+import com.examplemoi.harkka.MunicipalityActivity;
 import com.examplemoi.harkka.R;
+
+import java.io.Serializable;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link InfoFragment#newInstance} factory method to
+ * Use the {@link CompareFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class InfoFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
     public InfoFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment InfoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static InfoFragment newInstance(String param1, String param2) {
-        InfoFragment fragment = new InfoFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_info, container, false);
+        TextView txtName = view.findViewById(R.id.txtName);
+        TextView txtWeather = view.findViewById(R.id.txtWeather);
+        TextView txtWind = view.findViewById(R.id.txtWind);
+        TextView txtPopulation = view.findViewById(R.id.txtPopulation);
+        TextView txtLicence = view.findViewById(R.id.txtLicense);
+
+        if (getArguments() != null) {
+            Serializable infoSerializable = getArguments().getSerializable("dataID");
+
+// Check if the serializable object is not null and is of the expected type
+            if (infoSerializable instanceof Info) {
+                // Cast the serializable object to the appropriate type
+                Info info = (Info) infoSerializable;
+
+                // Set the name to the TextView
+                txtName.setText(info.getName());
+                txtWeather.setText(info.getTemperature());
+                txtWind.setText(info.getWind());
+                txtPopulation.setText(info.getPopulation());
+                txtLicence.setText(info.getLicence());
+
+            }
+
+
+        }
+        return view;
     }
 }

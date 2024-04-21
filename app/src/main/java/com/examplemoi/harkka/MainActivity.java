@@ -12,13 +12,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.examplemoi.harkka.fragments.InfoFragment;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     ArrayList<Search> searches = new ArrayList<>();
+
+    public EditText getEditName() {
+        return editName;
+    }
+
     private EditText editName;
     RecyclerView recyclerView;
     @Override
@@ -34,12 +42,19 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Info info = new Info(editName.getText().toString());
                 searchMunicipality(editName.toString());
+                DataBuilder.getInstance().addGrocery(info);
                 switchToMunicipality(v);
-                MainActivity.this.recreate();
+
+
             }
 
         });
+    }
+
+    public void buildInfo(){
+
     }
 
     public void searchMunicipality(String municipality){
@@ -49,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
             searches = new ArrayList<Search>();
         }
         searches.add(search);
-        System.out.println(searches);
+        System.out.println(editName.toString());
+
+
     }
 
     public void switchToMunicipality(View view) {
