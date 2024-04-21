@@ -6,11 +6,8 @@ import java.io.Serializable;
 
 public class Info implements Serializable {
     String name;
-    ImageView weatherIcon;
-    String temperature;
-    String wind;
-    String population;
-    String licence;
+    int weatherIcon;
+    String temperature, wind, population, licence, weather;
 
     public Info(String NameP){
         name = NameP;
@@ -18,13 +15,35 @@ public class Info implements Serializable {
         wind = "23 m/s";
         population = "81 778";
         licence = "30 000";
+        weather = "Clear";
+
+        switch (weather) {
+            case "Thunderstorm":
+                weatherIcon = R.drawable.thunder;
+                break;
+            case "Drizzle":
+                weatherIcon = R.drawable.rain;
+                break;
+            case "Rain":
+                weatherIcon = R.drawable.rain;
+                break;
+            case "Snow":
+                weatherIcon = R.drawable.snow;
+                break;
+            case "Clear":
+                weatherIcon = R.drawable.clear;
+                break;
+            default:
+                weatherIcon = R.drawable.fog;
+                break;
+        }
     }
 
     public String getName() {
         return name;
     }
 
-    public ImageView getWeatherIcon() {
+    public int getWeatherIcon() {
         return weatherIcon;
     }
 

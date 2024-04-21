@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.examplemoi.harkka.Info;
@@ -43,6 +44,7 @@ public class InfoFragment extends Fragment {
         TextView txtWind = view.findViewById(R.id.txtWind);
         TextView txtPopulation = view.findViewById(R.id.txtPopulation);
         TextView txtLicence = view.findViewById(R.id.txtLicense);
+        ImageView ivWeather = view.findViewById(R.id.ivWeather);
 
         if (getArguments() != null) {
             Serializable infoSerializable = getArguments().getSerializable("dataID");
@@ -58,6 +60,7 @@ public class InfoFragment extends Fragment {
                 txtWind.setText(info.getWind());
                 txtPopulation.setText(info.getPopulation());
                 txtLicence.setText(info.getLicence());
+                ivWeather.setImageResource(info.getWeatherIcon());
 
             }
 

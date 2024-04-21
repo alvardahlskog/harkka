@@ -17,7 +17,7 @@
         android:textSize="30sp" />
 
     <ImageView
-        android:id="@+id/imgWeather"
+        android:id="@+id/ivWeather"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
