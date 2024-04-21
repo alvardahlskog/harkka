@@ -71,11 +71,20 @@ public class MainActivity extends AppCompatActivity {
         String municipality = editName.getText().toString();
         String countryCode = "FIN";
         final String weatherUrl = "https://api.openweathermap.org/data/2.5/weather";
-        final String appid = "9f15c2db6185216b4715fc08c7632bef";
 
-        if (municipality.equals("")) {
-            Toast.makeText(this, "Kirjoita kunnan nimi tekstikenttään", Toast.LENGTH_SHORT).show();
-            return; // Exit early if municipality is empty
+
+
+        //***********************  YOUR API key here  ********************* //
+        //                                                                  //
+              final String appid = "9f15c2db6185216b4715fc08c7632bef";
+        //                                                                  //
+        //******************************************************************//
+
+
+        //  Display error and exit early if name is empty
+        if (municipality.isEmpty()) {
+            Toast.makeText(this, "Anna kunnan nimi!", Toast.LENGTH_SHORT).show();
+            return;
         }
 
         String tempWeatherUrl = weatherUrl + "?q=" + municipality + ",FIN&appid=" + appid;
@@ -86,24 +95,22 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             JSONObject jsonResponse = new JSONObject(response);
 
-                            // Parsing weather
+                            // Parsing the JSON response
                             JSONArray weatherArray = jsonResponse.getJSONArray("weather");
 
                             JSONObject jsonObjectWeather = weatherArray.getJSONObject(0);
                             String weather = jsonObjectWeather.getString("main");
 
-                            //Parsing name to ensure capitalization
+                            // Name from JSON response to capitalize displayed name
                             String name = jsonResponse.getString("name");
 
-
-
-                            // Parsing main weather info
+                            // Main weather info
                             JSONObject jsonObjectMain = jsonResponse.getJSONObject("main");
                             double tempDouble = jsonObjectMain.getDouble("temp") - 273.15;
                             int roundedTemperature = (int) Math.round(tempDouble);
                             String temperature = String.valueOf(roundedTemperature)+"°C, " + weather;
 
-                            // Parsing wind info
+                            // Wind info
                             JSONObject jsonObjectWind = jsonResponse.getJSONObject("wind");
                             double windDouble = jsonObjectWind.getDouble("speed");
                             int roundedWind = (int) Math.round(windDouble);
@@ -111,12 +118,10 @@ public class MainActivity extends AppCompatActivity {
                             Info info = new Info(name,temperature,wind,weather);
                             DataBuilder.getInstance().addMunicipality(info);
 
-
-                            // Call the callback once weather information is available
                             callback.onWeatherInfoAvailable();
 
                         } catch (JSONException e) {
-                            e.printStackTrace(); // Log JSON parsing errors
+                            e.printStackTrace();
                         }
                     }
                 },
