@@ -9,13 +9,13 @@ public class Info implements Serializable {
     int weatherIcon;
     String temperature, wind, population, licence, weather;
 
-    public Info(String NameP){
-        name = NameP;
-        temperature = "200°C";
-        wind = "23 m/s";
+    public Info(String name, String temperature, String wind, String weather){
+        this.name = name;
+        this.temperature = temperature;
+        this.wind = wind;
         population = "81 778";
         licence = "30 000";
-        weather = "Clear";
+        this.weather = weather;
 
         switch (weather) {
             case "Thunderstorm":

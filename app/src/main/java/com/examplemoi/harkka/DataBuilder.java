@@ -14,7 +14,7 @@ public class DataBuilder {
     public ArrayList<Info> getMunicipalities() {
         return muncipalityList;
     }
-    public void addGrocery(Info info) {
+    public void addMunicipality(Info info) {
         muncipalityList.add(info);
     }
 }
