@@ -21,12 +21,11 @@ import com.examplemoi.harkka.fragments.InfoFragment;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<Search> searches = new ArrayList<>();
+    ArrayList<String> searches = SearchHistory.getInstance().getSearches();
 
     public EditText getEditName() {
         return editName;
     }
-
     private EditText editName;
     RecyclerView recyclerView;
     @Override
@@ -38,32 +37,21 @@ public class MainActivity extends AppCompatActivity {
         Button button = findViewById(R.id.button);
         recyclerView = findViewById(R.id.rvSearches);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new SearchListAdapter(getApplicationContext(), searches));
+        recyclerView.setAdapter(new SearchHistoryAdapter(getApplicationContext(), searches));
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Info info = new Info(editName.getText().toString());
+                SearchHistory.getInstance().addSearch(editName.getText().toString());
                 DataBuilder.getInstance().addGrocery(info);
                 switchToMunicipality(v);
-
-
             }
-
         });
     }
-
     public void buildInfo(){
-
     }
-
-
-
-
     public void switchToMunicipality(View view) {
         Intent intent = new Intent(this, MunicipalityActivity.class);
         startActivity(intent);
     }
-
-
-
 }

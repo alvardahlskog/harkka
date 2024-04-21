@@ -9,13 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class SearchListAdapter extends RecyclerView.Adapter<SearchViewHolder>{
-
-
+public class SearchHistoryAdapter extends RecyclerView.Adapter<SearchViewHolder>{
     private Context context;
-    private ArrayList<Search> searches = new ArrayList<>();
+    private ArrayList<String> searches;
 
-    public SearchListAdapter(Context context, ArrayList<Search> searches) {
+    public SearchHistoryAdapter(Context context, ArrayList<String> searches) {
         this.context = context;
         this.searches = searches;
     }
@@ -28,7 +26,7 @@ public class SearchListAdapter extends RecyclerView.Adapter<SearchViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull SearchViewHolder holder, int position) {
-        holder.textSearch.setText(searches.get(position).getName());
+        holder.textSearch.setText(searches.get(position));
     }
 
     @Override
