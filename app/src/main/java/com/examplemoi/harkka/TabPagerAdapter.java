@@ -22,7 +22,8 @@ public class TabPagerAdapter extends FragmentStateAdapter {
     public Info importInfo() {
         list = DataBuilder.getInstance().getMunicipalities();
         if (!list.isEmpty()) {
-            Info info = list.get(0);
+
+            Info info = list.get(list.size()-1);
             return info;
         } else {
             return null;

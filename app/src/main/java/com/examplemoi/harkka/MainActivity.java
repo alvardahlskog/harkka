@@ -56,12 +56,17 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 SearchHistory.getInstance().addSearch(editName.getText().toString());
-                buildInfo(v);
+                buildInfo(v, new WeatherCallback() {
+                    @Override
+                    public void onWeatherInfoAvailable() {
+                        switchToMunicipality(v);
+                    }
+                });
 
             }
         });
     }
-    public void buildInfo(View v) {
+    public void buildInfo(View v, WeatherCallback callback) {
 
         String municipality = editName.getText().toString();
         String countryCode = "FIN";
@@ -79,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            //Info info = new Info(municipality);
                             JSONObject jsonResponse = new JSONObject(response);
 
                             // Parsing weather
@@ -88,20 +92,27 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject jsonObjectWeather = weatherArray.getJSONObject(0);
                             String weather = jsonObjectWeather.getString("main");
 
-                                Log.d("weather", weather);
+                            //Parsing name to ensure capitalization
+                            String name = jsonResponse.getString("name");
 
 
                             // Parsing main weather info
                             JSONObject jsonObjectMain = jsonResponse.getJSONObject("main");
                             double tempDouble = jsonObjectMain.getDouble("temp") - 273.15;
-                            String temperature = Double.toString(tempDouble);
+                            int roundedTemperature = (int) Math.round(tempDouble);
+                            String temperature = String.valueOf(roundedTemperature)+"°C";
 
                             // Parsing wind info
                             JSONObject jsonObjectWind = jsonResponse.getJSONObject("wind");
-                            String wind = jsonObjectWind.getString("speed");
-                            Info info = new Info(municipality,temperature,wind,weather);
+                            double windDouble = jsonObjectWind.getDouble("speed");
+                            int roundedWind = (int) Math.round(windDouble);
+                            String wind = String.valueOf(roundedWind)+" m/s";
+                            Info info = new Info(name,temperature,wind,weather);
                             DataBuilder.getInstance().addMunicipality(info);
 
+
+                            // Call the callback once weather information is available
+                            callback.onWeatherInfoAvailable();
 
                         } catch (JSONException e) {
                             e.printStackTrace(); // Log JSON parsing errors
@@ -115,10 +126,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
-
-        switchToMunicipality(v);
+    }
+    public interface WeatherCallback {
+        void onWeatherInfoAvailable();
     }
     public void switchToMunicipality(View view) {
         Intent intent = new Intent(this, MunicipalityActivity.class);
