@@ -74,7 +74,8 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="20dp"
             android:text="TextView"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/txtComWeather2"
@@ -84,7 +85,8 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:text="TextView"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/txtComPop2"
@@ -94,7 +96,8 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:text="TextView"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/txtComLis2"
@@ -104,7 +107,26 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:text="TextView"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/etxtName"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginStart="100sp"
+            android:layout_marginTop="50sp"
+            android:ems="10"
+            android:hint="etsi kunta"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/btnSearchComp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150sp"
+            android:layout_marginTop="5sp"
+            android:text="hae" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
