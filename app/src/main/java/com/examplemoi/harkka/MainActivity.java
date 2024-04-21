@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Info info = new Info(editName.getText().toString());
-                searchMunicipality(editName.toString());
                 DataBuilder.getInstance().addGrocery(info);
                 switchToMunicipality(v);
 
@@ -57,17 +56,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void searchMunicipality(String municipality){
-        Search search = new Search();
-        search.name=editName.getText().toString();
-        if(searches == null) {
-            searches = new ArrayList<Search>();
-        }
-        searches.add(search);
-        System.out.println(editName.toString());
 
 
-    }
 
     public void switchToMunicipality(View view) {
         Intent intent = new Intent(this, MunicipalityActivity.class);
