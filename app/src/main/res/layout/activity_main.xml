@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
+    android:background="@color/lightblue"
     tools:context=".MainActivity">
 
 
@@ -33,10 +34,10 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSearches"
         android:layout_width="162dp"
         android:layout_height="199dp"
         android:layout_marginTop="8dp"
-        android:id="@+id/rvSearches"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button" />

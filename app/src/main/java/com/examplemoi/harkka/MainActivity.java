@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void buildInfo(){
+
     }
     public void switchToMunicipality(View view) {
         Intent intent = new Intent(this, MunicipalityActivity.class);
