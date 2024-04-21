@@ -96,11 +96,12 @@ public class MainActivity extends AppCompatActivity {
                             String name = jsonResponse.getString("name");
 
 
+
                             // Parsing main weather info
                             JSONObject jsonObjectMain = jsonResponse.getJSONObject("main");
                             double tempDouble = jsonObjectMain.getDouble("temp") - 273.15;
                             int roundedTemperature = (int) Math.round(tempDouble);
-                            String temperature = String.valueOf(roundedTemperature)+"°C";
+                            String temperature = String.valueOf(roundedTemperature)+"°C, " + weather;
 
                             // Parsing wind info
                             JSONObject jsonObjectWind = jsonResponse.getJSONObject("wind");

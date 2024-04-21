@@ -27,7 +27,7 @@
         android:layout_height="55dp"
         android:layout_marginTop="100dp"
         android:ems="10"
-        android:hint="Kaupunki"
+        android:hint="Kunnan nimi"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
