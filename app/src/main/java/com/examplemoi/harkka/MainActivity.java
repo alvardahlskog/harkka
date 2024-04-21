@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        String tempWeatherUrl = weatherUrl + "?q=" + municipality + ",FIN&appid=" + appid;
+        String tempWeatherUrl = weatherUrl + "?q=" + municipality + ",FIN&lang=fi&appid=" + appid;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, tempWeatherUrl,
                 new Response.Listener<String>() {
                     @Override
@@ -100,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
                             JSONObject jsonObjectWeather = weatherArray.getJSONObject(0);
                             String weather = jsonObjectWeather.getString("main");
+                            String descriptionSmall = jsonObjectWeather.getString("description");
+                            String description = descriptionSmall.substring(0, 1).toUpperCase() + descriptionSmall.substring(1);
 
                             // Name from JSON response to capitalize displayed name
                             String name = jsonResponse.getString("name");
@@ -108,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                             JSONObject jsonObjectMain = jsonResponse.getJSONObject("main");
                             double tempDouble = jsonObjectMain.getDouble("temp") - 273.15;
                             int roundedTemperature = (int) Math.round(tempDouble);
-                            String temperature = String.valueOf(roundedTemperature)+"°C, " + weather;
+                            String temperature = String.valueOf(roundedTemperature)+"°C, " + description;
 
                             // Wind info
                             JSONObject jsonObjectWind = jsonResponse.getJSONObject("wind");

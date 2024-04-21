@@ -13,8 +13,8 @@ public class Info implements Serializable {
         this.name = name;
         this.temperature = temperature;
         this.wind = wind;
-        population = "81 778";
-        licence = "30 000";
+        population = "Väkiluku: 100 000";
+        licence = "Ajokortillisia: 30 000";
         this.weather = weather;
 
         switch (weather) {
