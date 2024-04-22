@@ -8,31 +8,27 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tabLayout"
-        app:tabIndicatorAnimationDuration="@integer/material_motion_duration_long_1">
+        app:tabBackground="@color/blue"
+        app:tabIndicatorAnimationDuration="@integer/material_motion_duration_long_1"
+        app:tabIndicatorColor="@color/darlblue"
+        app:tabIndicatorGravity="bottom"
+        app:tabSelectedTextColor="@color/darlblue"
+        app:tabTextColor="@color/lightblue">
 
         <com.google.android.material.tabs.TabItem
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Tiedot"
             android:id="@+id/infoTab"
-            />
-
-        <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Vertaa"
+            android:text="Tiedot" />
+
+        <com.google.android.material.tabs.TabItem
             android:id="@+id/compareTab"
-            />
-
-        <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Visa"
-            android:id="@+id/quizTab"
-            />
+            android:text="Vertaa" />
 
 
     </com.google.android.material.tabs.TabLayout>

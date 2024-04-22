@@ -64,8 +64,8 @@ public class TabPagerAdapter extends FragmentStateAdapter {
                 return setInfo();
             case 1:
                 return setCompare();
-            case 2:
-                return new QuizFragment();
+            /*case 2:
+                return new QuizFragment();*/
             default:
                 return new InfoFragment();
         }
@@ -74,6 +74,6 @@ public class TabPagerAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 2;
     }
 }
