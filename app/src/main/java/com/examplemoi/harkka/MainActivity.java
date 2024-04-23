@@ -34,8 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    ArrayList<String> searches = SearchHistory.getInstance().getSearches();
-
+    private SearchHistory searches = SearchHistory.getInstance();
     public EditText getEditName() {
         return editName;
     }
@@ -48,14 +47,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         editName = findViewById(R.id.editMunicipalityName);
         Button button = findViewById(R.id.button);
+
         recyclerView = findViewById(R.id.rvSearches);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new SearchHistoryAdapter(getApplicationContext(), searches));
+        recyclerView.setAdapter(new SearchHistoryAdapter(getApplicationContext(), searches.getSearches()));
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                SearchHistory.getInstance().addSearch(editName.getText().toString());
                 buildInfo(v, new WeatherCallback() {
                     @Override
                     public void onWeatherInfoAvailable() {
@@ -137,6 +136,9 @@ public class MainActivity extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
+
+        //adds the succesful search to search history
+        searches.addSearch(municipality);
     }
     public interface WeatherCallback {
         void onWeatherInfoAvailable();
@@ -144,5 +146,11 @@ public class MainActivity extends AppCompatActivity {
     public void switchToMunicipality(View view) {
         Intent intent = new Intent(this, MunicipalityActivity.class);
         startActivity(intent);
+    }
+
+    protected void onResume() {
+        super.onResume();
+        searches = SearchHistory.getInstance();
+        recyclerView.setAdapter(new SearchHistoryAdapter(getApplicationContext(), searches.getSearches()));
     }
 }
