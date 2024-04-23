@@ -1,29 +1,30 @@
 package com.examplemoi.harkka.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+
 import com.examplemoi.harkka.Info;
-import com.examplemoi.harkka.MainActivity;
-import com.examplemoi.harkka.MunicipalityActivity;
 import com.examplemoi.harkka.R;
 
 import java.io.Serializable;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link CompareFragment#newInstance} factory method to
+ * Use the {@link CompareFragment#} factory method to
  * create an instance of this fragment.
  */
 public class CompareFragment extends Fragment {
+    private EditText etxtName;
+    private Button btnSearchComp;
 
+    private TextView txtComName2, txtComWeather2, txtPopulation2, txtLicence2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,14 @@ public class CompareFragment extends Fragment {
         TextView txtWeather1 = view.findViewById(R.id.txtComWeather1);
         TextView txtPopulation1 = view.findViewById(R.id.txtCompPop1);
         TextView txtLicence1 = view.findViewById(R.id.txtCompLis1);
+
+        txtComName2 = view.findViewById(R.id.txtComName2);
+        txtComWeather2 = view.findViewById(R.id.txtComWeather2);
+        txtPopulation2 = view.findViewById(R.id.txtComPop2);
+        txtLicence2 = view.findViewById(R.id.txtComLis2);
+
+        etxtName = view.findViewById(R.id.etxtName);
+        btnSearchComp = view.findViewById(R.id.btnSearchComp);
 
         if (getArguments() != null) {
             Serializable infoSerializable = getArguments().getSerializable("dataID");
@@ -59,7 +68,27 @@ public class CompareFragment extends Fragment {
 
 
         }
+        btnSearchComp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                compare(etxtName.getText().toString());
+            }
+        });
         return view;
+    }
+
+    private void compare(String name) {
+        txtComName2.setText(name);
+        txtComWeather2.setText("hyvä sää :D");
+        txtPopulation2.setText("paljon ihmisiä :P");
+        txtLicence2.setText("sikana kuskeja :3");
+
+        txtComName2.setVisibility(View.VISIBLE);
+        txtComWeather2.setVisibility(View.VISIBLE);
+        txtPopulation2.setVisibility(View.VISIBLE);
+        txtLicence2.setVisibility(View.VISIBLE);
+
+        etxtName.setText("");
     }
 }
 
