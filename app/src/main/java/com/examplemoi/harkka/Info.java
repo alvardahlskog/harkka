@@ -1,7 +1,5 @@
 package com.examplemoi.harkka;
 
-import android.widget.ImageView;
-
 import java.io.Serializable;
 
 public class Info implements Serializable {
@@ -25,8 +23,6 @@ public class Info implements Serializable {
     public String getWeather() {
         return weather;
     }
-
-
 
     public String getTemperature() {
         return temperature;
