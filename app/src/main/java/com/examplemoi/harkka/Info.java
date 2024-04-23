@@ -11,7 +11,7 @@ public class Info implements Serializable {
         name = "tyhjä";
         temperature = "tyhjä";
         wind = "tyhjä";
-        population = "Väkiluku: 100 000";
+        population = "Väkiluku: Ei saatavilla";
         licence = "Ajokortillisia: 30 000";
         weather = "Clear";
     }
