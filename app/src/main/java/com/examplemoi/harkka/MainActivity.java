@@ -181,5 +181,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         searches = SearchHistory.getInstance();
         recyclerView.setAdapter(new SearchHistoryAdapter(getApplicationContext(), searches.getSearches()));
+        editName.setText("");
     }
 }
