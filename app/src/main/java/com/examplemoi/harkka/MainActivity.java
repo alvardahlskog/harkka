@@ -26,12 +26,20 @@ import com.android.volley.toolbox.Volley;
 
 
 import com.examplemoi.harkka.fragments.InfoFragment;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.examplemoi.harkka.fragments.InfoFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.concurrent.CompletableFuture;
 
 public class MainActivity extends AppCompatActivity {
     private SearchHistory searches = SearchHistory.getInstance();
@@ -65,9 +73,65 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    // Getting data and building the Info object
     public void buildInfo(View v, WeatherCallback callback) {
+        String municipalityUnedited = editName.getText().toString();
+        String municipality = municipalityUnedited.substring(0, 1).toUpperCase() + municipalityUnedited.substring(1);
+        // Population data
+        //https://pxdata.stat.fi/PxWeb/api/v1/fi/StatFin/synt/statfin_synt_pxt_12dy.px
 
-        String municipality = editName.getText().toString();
+        CompletableFuture.supplyAsync(() -> {
+            try {
+                URL url = new URL("https://pxdata.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px");
+                ObjectMapper objectMapper = new ObjectMapper();
+                return objectMapper.readTree(url);
+
+            } catch (IOException e) {
+                Log.e("Error", "Failed to fetch data", e);
+                return null;
+            }
+
+        }).thenAcceptAsync(areas -> {
+            if (areas != null) {
+                Log.d("areas", areas.toPrettyString());
+
+                ArrayList<String> keys = new ArrayList<>();
+                ArrayList<String> values = new ArrayList<>();
+                for (JsonNode node : areas.get("variables").get(1).get("values")){
+                    values.add(node.asText());
+                }
+                for (JsonNode node : areas.get("variables").get(1).get("valueTexts")){
+                    keys.add(node.asText());
+                }
+                HashMap<String, String> municipalityCodes = new HashMap<>();
+                for(int i = 0; i<keys.size(); i++){
+                    municipalityCodes.put(keys.get(i), values.get(i) );
+                }
+
+                String code = null;
+                code = municipalityCodes.get(municipality);
+
+
+            } else {
+                Log.e("Error", "Failed to fetch data");
+            }
+        });
+
+
+
+
+
+
+        // Single municipality population
+        //https://pxdata.stat.fi:443/PxWeb/api/v1/fi/StatFin/synt/statfin_synt_pxt_12dy.px
+
+
+
+
+
+        // Getting weather information for Info object
+
+
         String countryCode = "FIN";
         final String weatherUrl = "https://api.openweathermap.org/data/2.5/weather";
 
@@ -88,61 +152,58 @@ public class MainActivity extends AppCompatActivity {
 
         String tempWeatherUrl = weatherUrl + "?q=" + municipality + ",FIN&lang=fi&appid=" + appid;
         StringRequest stringRequest = new StringRequest(Request.Method.POST, tempWeatherUrl,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonResponse = new JSONObject(response);
+                response -> {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
 
-                            // Parsing the JSON response
-                            JSONArray weatherArray = jsonResponse.getJSONArray("weather");
+                        // Parsing the JSON response
+                        JSONArray weatherArray = jsonResponse.getJSONArray("weather");
 
-                            JSONObject jsonObjectWeather = weatherArray.getJSONObject(0);
-                            String weather = jsonObjectWeather.getString("main");
-                            String descriptionSmall = jsonObjectWeather.getString("description");
-                            String description = descriptionSmall.substring(0, 1).toUpperCase() + descriptionSmall.substring(1);
+                        JSONObject jsonObjectWeather = weatherArray.getJSONObject(0);
+                        String weather = jsonObjectWeather.getString("main");
+                        String descriptionSmall = jsonObjectWeather.getString("description");
+                        String description = descriptionSmall.substring(0, 1).toUpperCase() + descriptionSmall.substring(1);
 
-                            // Name from JSON response to capitalize displayed name
-                            String name = jsonResponse.getString("name");
+                        // Name from JSON response to capitalize displayed name
+                        String name = jsonResponse.getString("name");
 
                             // Adds the successful search to search history with capitalized name
                             searches.addSearch(name);
 
-                            // Main weather info
-                            JSONObject jsonObjectMain = jsonResponse.getJSONObject("main");
-                            double tempDouble = jsonObjectMain.getDouble("temp") - 273.15;
-                            int roundedTemperature = (int) Math.round(tempDouble);
-                            String temperature = String.valueOf(roundedTemperature)+"°C, " + description;
+                        // Main weather info
+                        JSONObject jsonObjectMain = jsonResponse.getJSONObject("main");
+                        double tempDouble = jsonObjectMain.getDouble("temp") - 273.15;
+                        int roundedTemperature = (int) Math.round(tempDouble);
+                        String temperature = String.valueOf(roundedTemperature)+"°C, " + description;
 
-                            // Wind info
-                            JSONObject jsonObjectWind = jsonResponse.getJSONObject("wind");
-                            double windDouble = jsonObjectWind.getDouble("speed");
-                            int roundedWind = (int) Math.round(windDouble);
-                            String wind = String.valueOf(roundedWind)+" m/s";
-                            Info info = new Info(name,temperature,wind,weather);
-                            DataBuilder.getInstance().addMunicipality(info);
+                        // Wind info
+                        JSONObject jsonObjectWind = jsonResponse.getJSONObject("wind");
+                        double windDouble = jsonObjectWind.getDouble("speed");
+                        int roundedWind = (int) Math.round(windDouble);
+                        String wind = "Tuuli: "+String.valueOf(roundedWind)+" m/s";
+                        Info info = new Info(name,temperature,wind,weather);
+                        DataBuilder.getInstance().addMunicipality(info);
 
-                            callback.onWeatherInfoAvailable();
+                        callback.onWeatherInfoAvailable();
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        Toast.makeText(MainActivity.this, "Virhe", Toast.LENGTH_SHORT).show();
-                    }
-                });
+
+                volleyError ->
+                        Toast.makeText(MainActivity.this, "Virhe", Toast.LENGTH_SHORT).show());
 
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
+
     public interface WeatherCallback {
         void onWeatherInfoAvailable();
     }
+
     public void switchToMunicipality(View view) {
         Intent intent = new Intent(this, MunicipalityActivity.class);
         startActivity(intent);
