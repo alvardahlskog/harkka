@@ -35,7 +35,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
     // Getting data and building the Info object
     public void buildInfo(View v, WeatherCallback callback) {
         String municipalityUnedited = editName.getText().toString();
+        ObjectMapper objectMapper = new ObjectMapper();
+        Info info = new Info();
         String municipality = municipalityUnedited.substring(0, 1).toUpperCase() + municipalityUnedited.substring(1);
         // Population data
         //https://pxdata.stat.fi/PxWeb/api/v1/fi/StatFin/synt/statfin_synt_pxt_12dy.px
@@ -83,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
         CompletableFuture.supplyAsync(() -> {
             try {
                 URL url = new URL("https://pxdata.stat.fi/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px");
-                ObjectMapper objectMapper = new ObjectMapper();
                 return objectMapper.readTree(url);
 
             } catch (IOException e) {
@@ -111,6 +116,20 @@ public class MainActivity extends AppCompatActivity {
 
                 String code = municipalityCodes.get(municipality);
                 Log.d("Code",code);
+
+                try {
+                    URL url = new URL("https://pxdata.stat.fi:443/PxWeb/api/v1/fi/StatFin/synt/statfin_synt_pxt_12dy.px");
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    con.setRequestMethod("POST");
+                    con.setRequestProperty("Content-type","application/json; utf-8");
+                    con.setRequestProperty("Accept","application/json");
+                    con.setDoOutput(true);
+
+                    JsonNode jsonInputString = objectMapper.readTree(new File("query.json"));
+
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
 
 
             } else {
@@ -161,12 +180,13 @@ public class MainActivity extends AppCompatActivity {
                         JSONArray weatherArray = jsonResponse.getJSONArray("weather");
 
                         JSONObject jsonObjectWeather = weatherArray.getJSONObject(0);
-                        String weather = jsonObjectWeather.getString("main");
+                        info.weather = jsonObjectWeather.getString("main");
                         String descriptionSmall = jsonObjectWeather.getString("description");
                         String description = descriptionSmall.substring(0, 1).toUpperCase() + descriptionSmall.substring(1);
 
                         // Name from JSON response to capitalize displayed name
                         String name = jsonResponse.getString("name");
+                        info.name = name;
 
                             // Adds the successful search to search history with capitalized name
                             searches.addSearch(name);
@@ -175,14 +195,13 @@ public class MainActivity extends AppCompatActivity {
                         JSONObject jsonObjectMain = jsonResponse.getJSONObject("main");
                         double tempDouble = jsonObjectMain.getDouble("temp") - 273.15;
                         int roundedTemperature = (int) Math.round(tempDouble);
-                        String temperature = String.valueOf(roundedTemperature)+"°C, " + description;
+                        info.temperature= roundedTemperature +"°C, " + description;
 
                         // Wind info
                         JSONObject jsonObjectWind = jsonResponse.getJSONObject("wind");
                         double windDouble = jsonObjectWind.getDouble("speed");
                         int roundedWind = (int) Math.round(windDouble);
-                        String wind = "Tuuli: "+String.valueOf(roundedWind)+" m/s";
-                        Info info = new Info(name,temperature,wind,weather);
+                        info.wind = "Tuuli: "+ roundedWind +" m/s";
                         DataBuilder.getInstance().addMunicipality(info);
 
                         callback.onWeatherInfoAvailable();
