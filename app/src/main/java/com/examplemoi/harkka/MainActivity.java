@@ -108,8 +108,9 @@ public class MainActivity extends AppCompatActivity {
                     municipalityCodes.put(keys.get(i), values.get(i) );
                 }
 
-                String code = null;
-                code = municipalityCodes.get(municipality);
+
+                String code = municipalityCodes.get(municipality);
+                Log.d("Code",code);
 
 
             } else {

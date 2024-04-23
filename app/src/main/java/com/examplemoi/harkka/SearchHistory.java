@@ -20,6 +20,6 @@ public class SearchHistory {
     }
 
     public void addSearch(String name) {
-        searches.add(name);
+        searches.add(0,name);
     }
 }
