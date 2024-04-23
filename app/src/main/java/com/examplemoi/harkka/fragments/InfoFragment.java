@@ -95,7 +95,27 @@ public class InfoFragment extends Fragment {
                 txtWind.setText(info.getWind());
                 txtPopulation.setText(info.getPopulation());
                 txtLicence.setText(info.getLicence());
-                ivWeather.setImageResource(info.getWeatherIcon());
+                switch (info.getWeather()) {
+                    case "Thunderstorm":
+                        ivWeather.setImageResource(R.drawable.thunder);
+                        break;
+                    case "Drizzle":
+                        ivWeather.setImageResource(R.drawable.rain);
+                        break;
+                    case "Rain":
+                        ivWeather.setImageResource(R.drawable.rain);
+                        break;
+                    case "Snow":
+                        ivWeather.setImageResource(R.drawable.snow);
+                        break;
+                    case "Clear":
+                        ivWeather.setImageResource(R.drawable.clear);
+                        break;
+                    default:
+                        ivWeather.setImageResource(R.drawable.fog);
+
+                        break;
+                }
             }
         }
     }

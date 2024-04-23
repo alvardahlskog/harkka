@@ -43,6 +43,10 @@ public class Info implements Serializable {
         return name;
     }
 
+    public String getWeather() {
+        return weather;
+    }
+
     public int getWeatherIcon() {
         return weatherIcon;
     }
