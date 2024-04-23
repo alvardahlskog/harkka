@@ -3,18 +3,26 @@ package com.examplemoi.harkka;
 import java.util.ArrayList;
 
 public class PopulationDataBuilder {
-    private ArrayList<Info> muncipalityList = new ArrayList<>();
-    private static PopulationDataBuilder populationDataBuilder = null;
-    public static PopulationDataBuilder getInstance(){
-        if(populationDataBuilder == null) {
-            populationDataBuilder = new PopulationDataBuilder();
-        }
-        return populationDataBuilder;
+
+    private int year;
+    private int population;
+
+    public PopulationDataBuilder(int y, int p) {
+        year = y;
+        population = p;
     }
-    public ArrayList<Info> getMunicipalities() {
-        return muncipalityList;
+
+
+    public int getYear() {
+        return year;
     }
-    public void addMunicipality(Info info) {
-        muncipalityList.add(info);
+    public void setYear(int year) {
+        this.year = year;
+    }
+    public int getPopulation() {
+        return population;
+    }
+    public void setPopulation(int population) {
+        this.population = population;
     }
 }

@@ -1,20 +1,11 @@
 {
   "query": [
     {
-      "code": "Vuosi",
+      "code": "Alue",
       "selection": {
         "filter": "item",
         "values": [
-          "2022"
-        ]
-      }
-    },
-    {
-      "code": "Alue",
-      "selection": {
-        "filter": "agg:_Kunnat aakkosjärjestyksessä 2023.agg",
-        "values": [
-          "KU049"
+          "Korvaa tämä"
         ]
       }
     },
