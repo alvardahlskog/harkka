@@ -62,7 +62,6 @@ public class InfoFragment extends Fragment {
                 txtWind.setText(info.getWind());
                 txtPopulation.setText(info.getPopulation());
                 txtLicence.setText(info.getLicence());
-                ivWeather.setImageResource(info.getWeatherIcon());
 
             }
 
