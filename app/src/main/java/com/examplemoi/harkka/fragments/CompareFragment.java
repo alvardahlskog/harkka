@@ -40,12 +40,10 @@ public class CompareFragment extends Fragment {
         TextView txtName1 = view.findViewById(R.id.txtComName1);
         TextView txtWeather1 = view.findViewById(R.id.txtComWeather1);
         TextView txtPopulation1 = view.findViewById(R.id.txtCompPop1);
-        TextView txtLicence1 = view.findViewById(R.id.txtCompLis1);
 
         txtComName2 = view.findViewById(R.id.txtComName2);
         txtComWeather2 = view.findViewById(R.id.txtComWeather2);
         txtPopulation2 = view.findViewById(R.id.txtComPop2);
-        txtLicence2 = view.findViewById(R.id.txtComLis2);
 
         etxtName = view.findViewById(R.id.etxtName);
         btnSearchComp = view.findViewById(R.id.btnSearchComp);
@@ -62,7 +60,6 @@ public class CompareFragment extends Fragment {
                 txtName1.setText(info.getName());
                 txtWeather1.setText(info.getTemperature());
                 txtPopulation1.setText(info.getPopulation());
-                txtLicence1.setText(info.getLicence());
 
             }
 
@@ -81,12 +78,10 @@ public class CompareFragment extends Fragment {
         txtComName2.setText(name);
         txtComWeather2.setText("hyvä sää :D");
         txtPopulation2.setText("paljon ihmisiä :P");
-        txtLicence2.setText("sikana kuskeja :3");
 
         txtComName2.setVisibility(View.VISIBLE);
         txtComWeather2.setVisibility(View.VISIBLE);
         txtPopulation2.setVisibility(View.VISIBLE);
-        txtLicence2.setVisibility(View.VISIBLE);
 
         etxtName.setText("");
     }

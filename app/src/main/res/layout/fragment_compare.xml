@@ -47,15 +47,6 @@
             android:text="TextView"
             android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/txtCompLis1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
-            android:text="TextView"
-            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -97,17 +88,6 @@
             android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:text="Väkiluku"
-            android:textSize="18sp"
-            android:visibility="invisible" />
-
-        <TextView
-            android:id="@+id/txtComLis2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
-            android:text="Ajokortit"
             android:textSize="18sp"
             android:visibility="invisible" />
 

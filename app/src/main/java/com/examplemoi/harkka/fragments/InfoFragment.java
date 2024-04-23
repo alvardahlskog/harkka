@@ -45,7 +45,6 @@ public class InfoFragment extends Fragment {
         TextView txtWeather = view.findViewById(R.id.txtWeather);
         TextView txtWind = view.findViewById(R.id.txtWind);
         TextView txtPopulation = view.findViewById(R.id.txtPopulation);
-        TextView txtLicence = view.findViewById(R.id.txtLicense);
         ImageView ivWeather = view.findViewById(R.id.ivWeather);
 
         if (getArguments() != null) {
@@ -61,7 +60,6 @@ public class InfoFragment extends Fragment {
                 txtWeather.setText(info.getTemperature());
                 txtWind.setText(info.getWind());
                 txtPopulation.setText(info.getPopulation());
-                txtLicence.setText(info.getLicence());
 
             }
 
@@ -77,8 +75,9 @@ public class InfoFragment extends Fragment {
         TextView txtWeather = view.findViewById(R.id.txtWeather);
         TextView txtWind = view.findViewById(R.id.txtWind);
         TextView txtPopulation = view.findViewById(R.id.txtPopulation);
-        TextView txtLicence = view.findViewById(R.id.txtLicense);
+        TextView txtWikiLink = view.findViewById(R.id.txtWikiLink);
         ImageView ivWeather = view.findViewById(R.id.ivWeather);
+
 
         if (getArguments() != null) {
             Serializable infoSerializable = getArguments().getSerializable("dataID");
@@ -93,7 +92,7 @@ public class InfoFragment extends Fragment {
                 txtWeather.setText(info.getTemperature());
                 txtWind.setText(info.getWind());
                 txtPopulation.setText(info.getPopulation());
-                txtLicence.setText(info.getLicence());
+                txtWikiLink.setText("fi.wikipedia.org/wiki/"+info.getName());
                 switch (info.getWeather()) {
                     case "Thunderstorm":
                         ivWeather.setImageResource(R.drawable.thunder);
