@@ -105,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
                             // Name from JSON response to capitalize displayed name
                             String name = jsonResponse.getString("name");
 
+                            // Adds the successful search to search history with capitalized name
+                            searches.addSearch(name);
+
                             // Main weather info
                             JSONObject jsonObjectMain = jsonResponse.getJSONObject("main");
                             double tempDouble = jsonObjectMain.getDouble("temp") - 273.15;
@@ -136,9 +139,6 @@ public class MainActivity extends AppCompatActivity {
 
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
-
-        //adds the succesful search to search history
-        searches.addSearch(municipality);
     }
     public interface WeatherCallback {
         void onWeatherInfoAvailable();

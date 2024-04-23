@@ -13,6 +13,6 @@ public class SearchViewHolder extends RecyclerView.ViewHolder {
 
     public SearchViewHolder(@NonNull View itemView) {
         super(itemView);
-        textSearch = itemView.findViewById(R.id.editMunicipalityName);
+        textSearch = itemView.findViewById(R.id.textMunicipality);
     }
 }
