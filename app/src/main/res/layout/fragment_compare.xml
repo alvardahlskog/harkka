@@ -59,9 +59,9 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="412dp"
-        android:layout_height="380dp"
-        android:layout_marginTop="25dp"
+        android:layout_width="0dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,7 +77,7 @@
             android:layout_marginEnd="20dp"
             android:text="Kunta"
             android:textSize="30sp"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/txtComWeather2"
@@ -88,7 +88,7 @@
             android:layout_marginEnd="20dp"
             android:text="Sää"
             android:textSize="20sp"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/txtComPop2"
@@ -99,7 +99,7 @@
             android:layout_marginEnd="20dp"
             android:text="Väkiluku"
             android:textSize="18sp"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <TextView
             android:id="@+id/txtComLis2"
@@ -110,14 +110,14 @@
             android:layout_marginEnd="20dp"
             android:text="Ajokortit"
             android:textSize="18sp"
-            android:visibility="visible" />
+            android:visibility="invisible" />
 
         <EditText
             android:id="@+id/etxtName"
             android:layout_width="200dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginTop="50sp"
+            android:layout_marginTop="25sp"
             android:backgroundTint="@color/lightblue"
             android:ems="10"
             android:hint="etsi kunta"

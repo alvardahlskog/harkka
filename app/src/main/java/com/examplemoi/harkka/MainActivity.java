@@ -1,6 +1,5 @@
 package com.examplemoi.harkka;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,25 +10,15 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
-
-import com.examplemoi.harkka.fragments.InfoFragment;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import com.examplemoi.harkka.fragments.InfoFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,9 +32,6 @@ import java.util.concurrent.CompletableFuture;
 
 public class MainActivity extends AppCompatActivity {
     private SearchHistory searches = SearchHistory.getInstance();
-    public EditText getEditName() {
-        return editName;
-    }
     private EditText editName;
     RecyclerView recyclerView;
     @Override
@@ -119,15 +105,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
         // Single municipality population
         //https://pxdata.stat.fi:443/PxWeb/api/v1/fi/StatFin/synt/statfin_synt_pxt_12dy.px
-
-
-
 
 
         // Getting weather information for Info object
@@ -167,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
 
                         // Name from JSON response to capitalize displayed name
                         String name = jsonResponse.getString("name");
-
                             // Adds the successful search to search history with capitalized name
                             searches.addSearch(name);
 
@@ -214,5 +192,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         searches = SearchHistory.getInstance();
         recyclerView.setAdapter(new SearchHistoryAdapter(getApplicationContext(), searches.getSearches()));
+
+        editName.setText("");
     }
 }
