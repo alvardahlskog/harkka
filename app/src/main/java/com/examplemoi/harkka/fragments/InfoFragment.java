@@ -44,7 +44,6 @@ public class InfoFragment extends Fragment {
         TextView txtName = view.findViewById(R.id.txtName);
         TextView txtWeather = view.findViewById(R.id.txtWeather);
         TextView txtWind = view.findViewById(R.id.txtWind);
-        TextView txtPopulation = view.findViewById(R.id.txtPopulation);
         ImageView ivWeather = view.findViewById(R.id.ivWeather);
 
         if (getArguments() != null) {
@@ -59,7 +58,6 @@ public class InfoFragment extends Fragment {
                 txtName.setText(info.getName());
                 txtWeather.setText(info.getTemperature());
                 txtWind.setText(info.getWind());
-                txtPopulation.setText(info.getPopulation());
 
             }
 
@@ -74,7 +72,6 @@ public class InfoFragment extends Fragment {
         TextView txtName = view.findViewById(R.id.txtName);
         TextView txtWeather = view.findViewById(R.id.txtWeather);
         TextView txtWind = view.findViewById(R.id.txtWind);
-        TextView txtPopulation = view.findViewById(R.id.txtPopulation);
         TextView txtWikiLink = view.findViewById(R.id.txtWikiLink);
         ImageView ivWeather = view.findViewById(R.id.ivWeather);
 
@@ -91,8 +88,7 @@ public class InfoFragment extends Fragment {
                 txtName.setText(info.getName());
                 txtWeather.setText(info.getTemperature());
                 txtWind.setText(info.getWind());
-                txtPopulation.setText(info.getPopulation());
-                txtWikiLink.setText("fi.wikipedia.org/wiki/"+info.getName());
+
                 switch (info.getWeather()) {
                     case "Thunderstorm":
                         ivWeather.setImageResource(R.drawable.thunder);

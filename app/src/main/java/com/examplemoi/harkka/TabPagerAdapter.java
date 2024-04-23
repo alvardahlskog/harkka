@@ -9,7 +9,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.examplemoi.harkka.fragments.CompareFragment;
 import com.examplemoi.harkka.fragments.InfoFragment;
-import com.examplemoi.harkka.fragments.QuizFragment;
 
 import java.util.ArrayList;
 
@@ -48,14 +47,7 @@ public class TabPagerAdapter extends FragmentStateAdapter {
         return fragment;
     }
 
-    public Fragment setQuiz(){
-        Fragment fragment;
-        Bundle data = new Bundle();
-        fragment = new QuizFragment();
-        data.putSerializable("dataID",importInfo());
-        fragment.setArguments(data);
-        return fragment;
-    }
+
     @NonNull
     @Override
     public Fragment createFragment(int position) {
@@ -64,8 +56,7 @@ public class TabPagerAdapter extends FragmentStateAdapter {
                 return setInfo();
             case 1:
                 return setCompare();
-            /*case 2:
-                return new QuizFragment();*/
+
             default:
                 return new InfoFragment();
         }

@@ -21,10 +21,7 @@ import java.io.Serializable;
  * create an instance of this fragment.
  */
 public class CompareFragment extends Fragment {
-    private EditText etxtName;
-    private Button btnSearchComp;
 
-    private TextView txtComName2, txtComWeather2, txtPopulation2, txtLicence2;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -38,15 +35,11 @@ public class CompareFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_compare, container, false);
         TextView txtName1 = view.findViewById(R.id.txtComName1);
-        TextView txtWeather1 = view.findViewById(R.id.txtComWeather1);
         TextView txtPopulation1 = view.findViewById(R.id.txtCompPop1);
+        TextView txtWikiLink = view.findViewById(R.id.txtWikiLink);
 
-        txtComName2 = view.findViewById(R.id.txtComName2);
-        txtComWeather2 = view.findViewById(R.id.txtComWeather2);
-        txtPopulation2 = view.findViewById(R.id.txtComPop2);
 
-        etxtName = view.findViewById(R.id.etxtName);
-        btnSearchComp = view.findViewById(R.id.btnSearchComp);
+
 
         if (getArguments() != null) {
             Serializable infoSerializable = getArguments().getSerializable("dataID");
@@ -58,32 +51,18 @@ public class CompareFragment extends Fragment {
 
                 // Set the name to the TextView
                 txtName1.setText(info.getName());
-                txtWeather1.setText(info.getTemperature());
                 txtPopulation1.setText(info.getPopulation());
+                txtWikiLink.setText("fi.wikipedia.org/wiki/"+info.getName());
+
 
             }
 
 
         }
-        btnSearchComp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                compare(etxtName.getText().toString());
-            }
-        });
+
         return view;
     }
 
-    private void compare(String name) {
-        txtComName2.setText(name);
-        txtComWeather2.setText("hyvä sää :D");
-        txtPopulation2.setText("paljon ihmisiä :P");
 
-        txtComName2.setVisibility(View.VISIBLE);
-        txtComWeather2.setVisibility(View.VISIBLE);
-        txtPopulation2.setVisibility(View.VISIBLE);
-
-        etxtName.setText("");
-    }
 }
 

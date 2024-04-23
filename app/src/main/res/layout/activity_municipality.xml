@@ -22,13 +22,13 @@
             android:id="@+id/infoTab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Tiedot" />
+            android:text="Sää" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/compareTab"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Vertaa" />
+            android:text="Tietoa kunnasta" />
 
 
     </com.google.android.material.tabs.TabLayout>
