@@ -87,6 +87,8 @@ public class CompareFragment extends Fragment {
         txtComWeather2.setVisibility(View.VISIBLE);
         txtPopulation2.setVisibility(View.VISIBLE);
         txtLicence2.setVisibility(View.VISIBLE);
+
+        etxtName.setText("");
     }
 }
 

@@ -12,11 +12,11 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:context=".fragments.InfoFragment"
-        tools:layout_editor_absoluteX="0dp">
+        tools:context=".fragments.InfoFragment">
 
         <TextView
             android:id="@+id/txtComName1"
@@ -61,7 +61,6 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="300dp"
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,10 +116,9 @@
             android:layout_width="200dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:layout_marginTop="25sp"
-            android:backgroundTint="@color/lightblue"
+            android:layout_marginTop="10dp"
             android:ems="10"
-            android:hint="etsi kunta"
+            android:hint="Kunnan nimi"
             android:inputType="text" />
 
         <Button
